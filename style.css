@@ -91,13 +91,13 @@ body {
 }
 
 .imagem-lado {
-  width: 500px;
+  width: 400px;
   margin-right: 300px;
   border-radius: 10px;
 }
 
 .texto-lado {
-  max-width: 500px;
+  max-width: 400px;
   color: white;
   font-size: 17px;
 }
