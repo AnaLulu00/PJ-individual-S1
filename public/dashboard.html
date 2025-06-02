@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="../public/dashboards.css" />
+</head>
+<body>
+  <aside>
+    <img src="../img/logo.png" alt="Logo Tamoios">
+    <p><strong>Bem vindo, "Nome do usuário"!</strong></p>
+    <p><a href="#">Ver rendimento</a></p>
+    <p><a href="../public/index.html">Voltar</a></p>
+  </aside>
+
+  <main>
+    <h1>Cadastro de atividade</h1>
+    <p>As informações inseridas no formulário abaixo servirão para calcular quanto falta para completar o caderno da classe!</p>
+
+    <div class="container-formulario">
+      <label>Total de páginas do caderno:<br>
+        <input type="number" id="total">
+      </label><br>
+
+      <label>Quantidade de páginas já feitas:<br>
+        <input type="number" id="feito">
+      </label><br>
+
+      <label>Página para casa:<br>
+        <input type="text" id="tarefa">
+      </label><br>
+
+      <button onclick="calcular()">Calcular</button>
+    </div>
+
+    <div class="container-graficos">
+      <div>
+        <h2>Rendimento pessoal</h2>
+        <canvas id="graficoPizza" width="300" height="300"></canvas>
+      </div>
+
+      <div>
+        <h2>Rendimento da classe</h2>
+        <canvas id="graficoBarra" width="400" height="300"></canvas>
+      </div>
+    </div>
+  </main>
+
+  <script src="script_dash.js"></script>
+</body>
+</html>
