@@ -9,9 +9,9 @@
 <body>
   <header class="header">
     <div class="logo-area">
-    <img src=../img/logo.png alt="Logo" class="logo">
-     <h1 class="titulo">Tamoios</h1>
-     </div>
+      <img src="../img/logo.png" alt="Logo" class="logo">
+      <h1 class="titulo">Tamoios</h1>
+    </div>
     <nav class="menu">
       <a href="index.html">Home</a>
       <a href="#">Sobre nós</a>
@@ -25,7 +25,7 @@
     <p>Esta página está destinada à pessoas que já são inscritas no clube.</p>
     <p>Se você não fez sua inscrição ainda, entre em contato com nossa equipe!</p>
     <br><br>
-    <form class="form">
+    <div class="form">
       <label for="nome">Nome Completo:</label>
       <input type="text" id="nome" name="nome" required />
 
@@ -58,7 +58,7 @@
       <button onclick="Cadastrar()">Cadastrar</button>
       <p>Já tem uma conta? <a href="login.html">Faça login</a></p>
       <div id="mensagem_erro"></div>
-    </form>
+    </div>
   </main>
 
   <footer class="footer">
@@ -67,32 +67,27 @@
   </footer>
 </body>
 </html>
-<script>
-  // validações
-  function Cadastrar() {
 
-    var nome = nome.value;
-    var email = email.value;
-    var senha = senha.value;
-    var funcao = funcao.value;
-    var classe = classe.value;
+<script>
+  function Cadastrar() {
+    var nome = document.getElementById("nome").value;
+    var email = document.getElementById("email").value;
+    var senha = document.getElementById("senha").value;
+    var funcao = document.getElementById("funcao").value;
+    var classe = document.getElementById("classe").value;
+    var mensagemErro = document.getElementById("mensagem_erro");
 
     if (
-      nome == "" ||
-      email == "" ||
-      senha == "" ||
-      funcao == "" ||
-      classe == ""
+      nome === "" ||
+      email === "" ||
+      senha === "" ||
+      funcao === "" ||
+      classe === ""
     ) {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
-        "(Mensagem de erro para todos os campos em branco)";
-
-      finalizarAguardar();
+      mensagemErro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
       return false;
     } else {
-      setInterval(sumirMensagem, 5000); // quero redirecionar para a página de dash aqui
-      
+      window.location.href = "../public/login.html"; // ou o nome da página que você quiser redirecionar
     }
   }
 </script>
