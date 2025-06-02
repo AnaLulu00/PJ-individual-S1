@@ -14,7 +14,6 @@
      </div>
     <nav class="menu">
       <a href="index.html">Home</a>
-      <a href="#">Sobre nós</a>
       <a href="blog.html">Blog</a>
       <a href="cadastro.html">Cadastro</a>
     </nav>
@@ -50,15 +49,42 @@ if (
   email == "" ||
   senha == ""
 ) {
-  cardErro.style.display = "block";
   mensagem_erro.innerHTML =
     "campos em branco";
-
-  finalizarAguardar();
   return false;
-} else {
-  setInterval(sumirMensagem, 5000); // quero redirecionar para a página de dash aqui
-  
 }
+fetch("/usuarios/entrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nomeVar,
+        senhaServer: senhaVar
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          //cardErro.style.display = "block";
+
+          //mensagem_erro.innerHTML =
+            // "Login realizado com sucesso! Redirecionando para tela de Dashboard...";
+
+          setTimeout(() => {
+            window.location = "dashboard.html";
+          }, "2000");
+        } else {
+          resposta.text().then(texto => {
+            console.error(texto);
+          })
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
 }
 </script>
