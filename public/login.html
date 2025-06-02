@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login</title>
-  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="./styles/style.css" />
 </head>
 <body>
   <header class="header">
@@ -43,7 +43,7 @@
 <script>
   function entrar() {
 
-var email = email.value;
+var email = nome.value;
 var senha = senha.value;
 
 if (
@@ -52,7 +52,7 @@ if (
 ) {
   cardErro.style.display = "block";
   mensagem_erro.innerHTML =
-    "(Mensagem de erro para todos os campos em branco)";
+    "campos em branco";
 
   finalizarAguardar();
   return false;

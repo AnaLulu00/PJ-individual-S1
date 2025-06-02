@@ -4,19 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cadastro</title>
-  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="./styles/style.css" />
 </head>
 <body>
   <header class="header">
     <div class="logo-area">
-      <img src="../img/logo.png" alt="Logo" class="logo">
+      <img src="./img/logo.png" alt="Logo" class="logo">
       <h1 class="titulo">Tamoios</h1>
     </div>
     <nav class="menu">
       <a href="index.html">Home</a>
-      <a href="#">Sobre nós</a>
       <a href="blog.html">Blog</a>
-      <a href="cadastro.html">cadastro</a>
+      <a href="cadastro.html">Cadastro</a>
     </nav>
   </header>
 
@@ -70,24 +69,58 @@
 
 <script>
   function Cadastrar() {
-    var nome = document.getElementById("nome").value;
-    var email = document.getElementById("email").value;
-    var senha = document.getElementById("senha").value;
-    var funcao = document.getElementById("funcao").value;
-    var classe = document.getElementById("classe").value;
+    var nomeVar = document.getElementById("nome").value;
+    var emailVar = document.getElementById("email").value;
+    var senhaVar = document.getElementById("senha").value;
+    var funcaoVar = document.getElementById("funcao").value;
+    var classeVar = document.getElementById("classe").value;
     var mensagemErro = document.getElementById("mensagem_erro");
 
     if (
-      nome === "" ||
-      email === "" ||
-      senha === "" ||
-      funcao === "" ||
-      classe === ""
+      nomeVar === "" ||
+      emailVar === "" ||
+      senhaVar === "" ||
+      funcaoVar === "" ||
+      classeVar === ""
     ) {
-      mensagemErro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+      mensagemErro.innerHTML = "<br> Cadastro não realizado. Confira se:<br> - Todos os campos foram preenchidos<br> - Seu email possui @ e .com";
       return false;
-    } else {
-      window.location.href = "../public/login.html"; // ou o nome da página que você quiser redirecionar
-    }
+    } 
+ fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nomeVar,
+        emailServer: emailVar,
+        senhaServer: senhaVar,
+        funcaoServer: funcaoVar,
+        classeServer: classeVar
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          //cardErro.style.display = "block";
+
+          //mensagem_erro.innerHTML =
+            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+          setTimeout(() => {
+            window.location = "login.html";
+          }, "2000");
+        } else {
+          resposta.text().then(texto => {
+            console.error(texto);
+          })
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
   }
 </script>

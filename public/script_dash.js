@@ -1,20 +1,21 @@
 function calcular() {
-  const total = parseInt(document.getElementById('total').value);
-  const feito = parseInt(document.getElementById('feito').value);
+  const total = parseInt(document.getElementById('pagina_total').value);
+  const feito = parseInt(document.getElementById('paginas_feitas').value);
+  const casa = parseInt(document.getElementById('pagina_casa').value);
 
-  const faltando = total - feito;
-  const porcentagemFeito = ((feito / total) * 100).toFixed(1);
-  const porcentagemFaltando = (100 - porcentagemFeito).toFixed(1);
+  let somaFeita = feito + casa;
+  let faltando = total - somaFeita;
+  let porcentagemFeito = ((somaFeita / total) * 100).toFixed(1);
+  let porcentagemFaltando = (100 - porcentagemFeito).toFixed(1);
 
   // Atualiza o gráfico de pizza
-  atualizarPizza([porcentagemFeito, porcentagemFaltando]);
+  calcular([porcentagemFeito, porcentagemFaltando]);
 
-  //adicionar lógica pra salvar os dados
-}
 
 // Rendimento pessoal (gráfico de pizza)
 window.onload = () => {
   const ctx = document.getElementById("graficoPizza").getContext("2d");
+  
 
   new Chart(ctx, {
     type: "doughnut",
@@ -42,7 +43,7 @@ window.onload = () => {
     },
   });
 };
-
+}
 // Rendimento da classe (gráfico de barras)
 const barraCtx = document.getElementById('graficoBarra').getContext('2d');
 new Chart(barraCtx, {

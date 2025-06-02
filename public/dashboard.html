@@ -17,22 +17,31 @@
 
   <main>
     <h1>Cadastro de atividade</h1>
-    <p>As informações inseridas no formulário abaixo servirão para calcular quanto falta para completar o caderno da classe!</p>
+    <br>
+    <p>As informações inseridas no formulário abaixo servirão para</p>
+    <p>calcular quanto falta para completar o caderno da classe!</p>
+    <br>
 
     <div class="container-formulario">
       <label>Total de páginas do caderno:<br>
-        <input type="number" id="total">
+        <input type="number" id="pagina_total">
       </label><br>
 
       <label>Quantidade de páginas já feitas:<br>
-        <input type="number" id="feito">
+        <input type="number" id="paginas_feitas">
       </label><br>
 
       <label>Página para casa:<br>
-        <input type="text" id="tarefa">
+        <input type="text" id="pagina_casa">
+      </label><br>
+
+      <label>Data da reunião:<br>
+        <input type="date" id="data_atv">
       </label><br>
 
       <button onclick="calcular()">Calcular</button>
+
+    
     </div>
 
     <div class="container-graficos">
