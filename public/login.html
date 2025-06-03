@@ -4,12 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login</title>
+  <script src="./js/sessao.js"></script>
   <link rel="stylesheet" href="./styles/style.css" />
 </head>
 <body>
   <header class="header">
     <div class="logo-area">
-    <img src=../img/logo.png alt="Logo" class="logo">
+    <img src=./img/logo.png alt="Logo" class="logo">
      <h1 class="titulo">Tamoios</h1>
      </div>
     <nav class="menu">
@@ -41,50 +42,68 @@
 </html>
 <script>
   function entrar() {
+        //aguardar();
 
-var email = nome.value;
-var senha = senha.value;
+        var nomeVar = nome.value;
+        var senhaVar = senha.value;
 
-if (
-  email == "" ||
-  senha == ""
-) {
-  mensagem_erro.innerHTML =
-    "campos em branco";
-  return false;
-}
-fetch("/usuarios/entrar", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        // crie um atributo que recebe o valor recuperado aqui
-        // Agora vá para o arquivo routes/usuario.js
-        nomeServer: nomeVar,
-        senhaServer: senhaVar
-      }),
-    })
-      .then(function (resposta) {
-        console.log("resposta: ", resposta);
-
-        if (resposta.ok) {
-          //cardErro.style.display = "block";
-
-          //mensagem_erro.innerHTML =
-            // "Login realizado com sucesso! Redirecionando para tela de Dashboard...";
-
-          setTimeout(() => {
-            window.location = "dashboard.html";
-          }, "2000");
-        } else {
-          resposta.text().then(texto => {
-            console.error(texto);
-          })
+        if (nomeVar == "" || senhaVar == "") {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            finalizarAguardar();
+            return false;
         }
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-      });
-}
+        else {
+            setInterval(sumirMensagem, 5000)
+        }
+
+        console.log("FORM LOGIN: ", nomeVar);
+        console.log("FORM SENHA: ", senhaVar);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                nomeServer: nomeVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.SENHA_USUARIO = json.senha;
+                    console.log()
+
+                    window.location = "dashboard.html";
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
+    function sumirMensagem() {
+        cardErro.style.display = "none"
+    }
 </script>
