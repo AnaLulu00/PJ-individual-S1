@@ -1,3 +1,4 @@
+//console.log(req.body)
 var usuarioModel = require("../models/usuarioModel");
 
 
@@ -12,8 +13,11 @@ function autenticar(req, res) {
         return res.status(400).send("Sua senha está undefined!");
     }
 
+    console.log('teste1');
+
     usuarioModel.autenticar(nome, senha)
         .then(resultado => {
+            console.log('teste2');
             if (resultado.length === 1) {
                 const usuario = resultado[0];
                 res.json({
